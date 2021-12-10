@@ -157,21 +157,6 @@ class DogsHomeFragment : Fragment() {
                     }
                 }
             } catch (e: Exception) {
-               /* val layoutManager =
-                    dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
-                val sizeOfCurrentList = layoutManager.itemCount
-                val visibleItems = layoutManager.childCount
-                //recuperar a position do primeiro item que aparece apos ser scrollado
-                val topPosition = layoutManager.findFirstVisibleItemPosition()
-                val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
-                val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
-
-                if (shouldPaginate) {
-                    page++
-                    breedViewModel.getBreeds(page)
-                    isScrolling = false
-                }
-*/
                 e.printStackTrace()
             }
 
