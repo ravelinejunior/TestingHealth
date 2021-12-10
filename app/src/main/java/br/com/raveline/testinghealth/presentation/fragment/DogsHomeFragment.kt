@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.raveline.testinghealth.R
-import br.com.raveline.testinghealth.data.model.BreedsItem
 import br.com.raveline.testinghealth.databinding.FragmentDogsHomeBinding
 import br.com.raveline.testinghealth.presentation.adapter.BreedsAdapter
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModel
@@ -51,6 +50,7 @@ class DogsHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         dogsBinding = FragmentDogsHomeBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+        breedViewModel.isStaggered.value = false
         getDogsBreed()
         return dogsBinding.root
     }
@@ -70,14 +70,14 @@ class DogsHomeFragment : Fragment() {
     private fun setupRecyclerView(
         layoutManager: StaggeredGridLayoutManager? = null
     ) {
-        if(layoutManager != null){
+        if (layoutManager != null) {
             dogsBinding.recyclerViewFragmentsHome.apply {
                 setHasFixedSize(true)
                 itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
                 setLayoutManager(layoutManager)
                 adapter = breedsAdapter
             }
-        }else {
+        } else {
             dogsBinding.recyclerViewFragmentsHome.apply {
                 setHasFixedSize(true)
                 itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
@@ -124,56 +124,56 @@ class DogsHomeFragment : Fragment() {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-           try{
-               if(!breedViewModel.isStaggered.value){
-                   val layoutManager =
-                       dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
-                   val sizeOfCurrentList = layoutManager.itemCount
-                   val visibleItems = layoutManager.childCount
-                   //recuperar a position do primeiro item que aparece apos ser scrollado
-                   val topPosition = layoutManager.findFirstVisibleItemPosition()
-                   val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
-                   val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+            try {
+                if (!breedViewModel.isStaggered.value) {
+                    val layoutManager =
+                        dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
+                    val sizeOfCurrentList = layoutManager.itemCount
+                    val visibleItems = layoutManager.childCount
+                    //recuperar a position do primeiro item que aparece apos ser scrollado
+                    val topPosition = layoutManager.findFirstVisibleItemPosition()
+                    val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+                    val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
 
-                   if (shouldPaginate) {
-                       page++
-                       breedViewModel.getBreeds(page)
-                       isScrolling = false
-                   }
-               }else{
-                   val layoutManager =
-                       dogsBinding.recyclerViewFragmentsHome.layoutManager as StaggeredGridLayoutManager
-                   val sizeOfCurrentList = layoutManager.itemCount
-                   val visibleItems = layoutManager.childCount
-                   //recuperar a position do primeiro item que aparece apos ser scrollado
-                   val topPosition = layoutManager.itemCount
-                   val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
-                   val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+                    if (shouldPaginate) {
+                        page++
+                        breedViewModel.getBreeds(page)
+                        isScrolling = false
+                    }
+                } else {
+                    val layoutManager =
+                        dogsBinding.recyclerViewFragmentsHome.layoutManager as StaggeredGridLayoutManager
+                    val sizeOfCurrentList = layoutManager.itemCount
+                    val visibleItems = layoutManager.childCount
+                    //recuperar a position do primeiro item que aparece apos ser scrollado
+                    val topPosition = layoutManager.itemCount
+                    val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+                    val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
 
-                   if (shouldPaginate) {
-                       page++
-                       breedViewModel.getBreeds(page)
-                       isScrolling = false
-                   }
-               }
-           }catch (e:Exception){
-               val layoutManager =
-                   dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
-               val sizeOfCurrentList = layoutManager.itemCount
-               val visibleItems = layoutManager.childCount
-               //recuperar a position do primeiro item que aparece apos ser scrollado
-               val topPosition = layoutManager.findFirstVisibleItemPosition()
-               val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
-               val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+                    if (shouldPaginate) {
+                        page++
+                        breedViewModel.getBreeds(page)
+                        isScrolling = false
+                    }
+                }
+            } catch (e: Exception) {
+               /* val layoutManager =
+                    dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
+                val sizeOfCurrentList = layoutManager.itemCount
+                val visibleItems = layoutManager.childCount
+                //recuperar a position do primeiro item que aparece apos ser scrollado
+                val topPosition = layoutManager.findFirstVisibleItemPosition()
+                val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+                val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
 
-               if (shouldPaginate) {
-                   page++
-                   breedViewModel.getBreeds(page)
-                   isScrolling = false
-               }
-
-               e.printStackTrace()
-           }
+                if (shouldPaginate) {
+                    page++
+                    breedViewModel.getBreeds(page)
+                    isScrolling = false
+                }
+*/
+                e.printStackTrace()
+            }
 
         }
     }
