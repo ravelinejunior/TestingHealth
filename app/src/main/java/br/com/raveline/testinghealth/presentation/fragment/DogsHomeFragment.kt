@@ -84,23 +84,7 @@ class DogsHomeFragment : Fragment() {
                         dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
                     }
                 })
-                /*.collect { status ->
-                    if (status || breedViewModel.listBreeds.isNotEmpty()) {
-                        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
-                            if (breeds != null) {
-                                breedsAdapter.setData(breeds)
-                            }
-                            isLastPage = page == pages
-                        })
 
-                        setupRecyclerView()
-                    }
-
-                    else {
-                        dogsBinding.recyclerViewFragmentsHome.visibility = GONE
-                        dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
-                    }
-                }*/
         }
     }
 

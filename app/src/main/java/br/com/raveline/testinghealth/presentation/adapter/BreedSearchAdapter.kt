@@ -36,8 +36,18 @@ class BreedSearchAdapter : RecyclerView.Adapter<BreedSearchAdapter.MyViewHolder>
 
         fun bind(breed: BreedBySearchItem) {
             binding.tvNameBreedSearchAdapter.text = breed.name
-            binding.tvOriginBreedSearchAdapter.text = breed.origin
-            binding.tvGroupBreedSearchAdapter.text = breed.breedGroup
+            if(breed.origin == null || breed.origin.isEmpty()){
+                binding.tvOriginBreedSearchAdapter.text = "Origin Unknown"
+            }else {
+                binding.tvOriginBreedSearchAdapter.text = breed.origin
+            }
+
+            if(breed.breedGroup == null || breed.origin.equals("Unknown",true)){
+                binding.tvGroupBreedSearchAdapter.text = "Group Unknown"
+            }else {
+                binding.tvGroupBreedSearchAdapter.text = breed.breedGroup
+            }
+
             binding.cLayoutBreedAdapter.setOnClickListener {
                 val action =
                     SearchDogsFragmentDirections.actionSearchDogsFragmentToDetailsFragment(null,breed)

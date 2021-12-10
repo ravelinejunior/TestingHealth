@@ -33,16 +33,38 @@ class DetailsFragment : Fragment() {
             if (argsBreed.breeds != null) {
                 val breed = argsBreed.breeds
                 detailsBinding.tvNameDetailFragment.text = breed?.name
-                detailsBinding.tvOriginDetailFragment.text = breed?.origin
-                detailsBinding.tvTemperamentDetailsFragment.text = breed?.temperament
+                if (breed?.origin == null) {
+                    detailsBinding.tvOriginDetailFragment.text = "Origin Unknown"
+                } else {
+                    detailsBinding.tvOriginDetailFragment.text = breed.origin
+                }
+
+                if (breed?.temperament == null) {
+                    detailsBinding.tvTemperamentDetailsFragment.text = "Temperament Unknown"
+                } else {
+                    detailsBinding.tvTemperamentDetailsFragment.text = breed.temperament
+                }
+
             } else if (argsBreed.breedsSearch != null) {
                 val breed = argsBreed.breedsSearch
                 detailsBinding.tvNameDetailFragment.text = breed?.name
-                detailsBinding.tvOriginDetailFragment.text = breed?.origin
-                detailsBinding.tvTemperamentDetailsFragment.text = breed?.temperament
+
+                if (breed?.origin == null) {
+                    detailsBinding.tvOriginDetailFragment.text = "Origin Unknown"
+                } else {
+                    detailsBinding.tvOriginDetailFragment.text = breed.origin
+                }
+
+                if (breed?.temperament == null) {
+                    detailsBinding.tvTemperamentDetailsFragment.text = "Temperament Unknown"
+                } else {
+                    detailsBinding.tvTemperamentDetailsFragment.text = breed.temperament
+                }
             }
+
         } catch (e: Exception) {
-            Toast.makeText(context, "Some information are not here. Sorry!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Some information are not here. Sorry!", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
