@@ -6,14 +6,17 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class NetworkListeners : ConnectivityManager.NetworkCallback() {
 
-    private val isNetworkAvailable = MutableStateFlow(false)
+    private val isNetworkAvailable = MutableLiveData(false)
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun checkNetworkAvailability(context: Context): MutableStateFlow<Boolean> {
+    fun checkNetworkAvailability(context: Context): MutableLiveData<Boolean> {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.registerDefaultNetworkCallback(this)
@@ -35,10 +38,10 @@ class NetworkListeners : ConnectivityManager.NetworkCallback() {
     }
 
     override fun onAvailable(network: Network) {
-        isNetworkAvailable.value = true
+        isNetworkAvailable.postValue(true)
     }
 
     override fun onLost(network: Network) {
-        isNetworkAvailable.value = false
+        isNetworkAvailable.postValue(false)
     }
 }

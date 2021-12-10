@@ -2,10 +2,13 @@ package br.com.raveline.testinghealth.presentation.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.OvershootInterpolator
 import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -14,8 +17,11 @@ import br.com.raveline.testinghealth.databinding.FragmentDogsHomeBinding
 import br.com.raveline.testinghealth.presentation.adapter.BreedsAdapter
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModel
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModelFactory
+import br.com.raveline.testinghealth.utils.NetworkListeners
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,6 +36,8 @@ class DogsHomeFragment : Fragment() {
     lateinit var breedsAdapter: BreedsAdapter
 
     lateinit var breedViewModel: BreedViewModel
+
+    private val networkListeners = NetworkListeners()
 
     private var isScrolling = false
     private var isLoading = false
@@ -56,20 +64,52 @@ class DogsHomeFragment : Fragment() {
     }
 
     private fun getDogsBreed() {
-        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
-            if (breeds != null) {
-                breedsAdapter.setData(breeds)
-            }
 
-            isLastPage = page == pages
-        })
+        lifecycleScope.launch {
+            networkListeners.checkNetworkAvailability(dogsBinding.root.context)
+                .observe(viewLifecycleOwner,{status ->
+                    if (status || breedViewModel.listBreeds.isNotEmpty()) {
+                        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
+                            if (breeds != null) {
+                                breedsAdapter.setData(breeds)
+                            }
+                            isLastPage = page == pages
+                        })
 
-        setupRecyclerView()
+                        setupRecyclerView()
+                    }
+
+                    else {
+                        dogsBinding.recyclerViewFragmentsHome.visibility = GONE
+                        dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
+                    }
+                })
+                /*.collect { status ->
+                    if (status || breedViewModel.listBreeds.isNotEmpty()) {
+                        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
+                            if (breeds != null) {
+                                breedsAdapter.setData(breeds)
+                            }
+                            isLastPage = page == pages
+                        })
+
+                        setupRecyclerView()
+                    }
+
+                    else {
+                        dogsBinding.recyclerViewFragmentsHome.visibility = GONE
+                        dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
+                    }
+                }*/
+        }
     }
 
     private fun setupRecyclerView(
         layoutManager: StaggeredGridLayoutManager? = null
     ) {
+        hideProgressBar()
+        dogsBinding.recyclerViewFragmentsHome.visibility = VISIBLE
+        dogsBinding.ivNoConnectionFragmentDogs.visibility = GONE
         if (layoutManager != null) {
             dogsBinding.recyclerViewFragmentsHome.apply {
                 setHasFixedSize(true)
@@ -161,6 +201,14 @@ class DogsHomeFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun hideProgressBar() {
+        dogsBinding.progressBarFragmentDogs.visibility = GONE
+    }
+
+    private fun showProgressBar() {
+        dogsBinding.progressBarFragmentDogs.visibility = VISIBLE
     }
 
 
