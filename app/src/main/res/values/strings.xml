@@ -8,4 +8,5 @@
     <string name="dog_details">Dog Details</string>
     <string name="textview">TextView</string>
     <string name="order_by_name">Order by name</string>
+    <string name="switch_layout">Switch to Staggered Layout</string>
 </resources>

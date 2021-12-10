@@ -4,7 +4,10 @@
 
     <item
         android:id="@+id/menuOrderId"
-        android:iconTint="@color/white"
         app:actionViewClass="androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView"
         android:title="@string/order_by_name" />
+
+    <item
+        android:id="@+id/menuLayoutId"
+        android:title="@string/switch_layout" />
 </menu>

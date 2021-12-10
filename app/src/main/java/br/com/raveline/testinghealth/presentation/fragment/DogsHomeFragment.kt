@@ -5,6 +5,8 @@ import android.view.*
 import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.raveline.testinghealth.R
 import br.com.raveline.testinghealth.data.model.BreedsItem
 import br.com.raveline.testinghealth.databinding.FragmentDogsHomeBinding
@@ -42,25 +44,35 @@ class DogsHomeFragment : Fragment() {
         dogsBinding = FragmentDogsHomeBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         getDogsBreed()
-
-
         return dogsBinding.root
     }
 
     private fun getDogsBreed() {
         breedViewModel.getBreeds().observe(viewLifecycleOwner, { breeds ->
             if (breeds != null) {
-                setupRecyclerView(breeds)
+                breedsAdapter.setData(breeds)
             }
         })
+
+        setupRecyclerView()
     }
 
-    private fun setupRecyclerView(breedsList: List<BreedsItem>) {
-        dogsBinding.recyclerViewFragmentsHome.apply {
-            setHasFixedSize(true)
-            itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
-            breedsAdapter.setData(breedsList)
-            adapter = breedsAdapter
+    private fun setupRecyclerView(
+        layoutManager: StaggeredGridLayoutManager? = null,
+    ) {
+        if(layoutManager != null){
+            dogsBinding.recyclerViewFragmentsHome.apply {
+                setHasFixedSize(true)
+                itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
+                setLayoutManager(layoutManager)
+                adapter = breedsAdapter
+            }
+        }else {
+            dogsBinding.recyclerViewFragmentsHome.apply {
+                setHasFixedSize(true)
+                itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
+                adapter = breedsAdapter
+            }
         }
     }
 
@@ -76,6 +88,12 @@ class DogsHomeFragment : Fragment() {
                     breedsAdapter.setData(items)
                     dogsBinding.recyclerViewFragmentsHome.scheduleLayoutAnimation()
                 })
+
+            R.id.menuLayoutId -> {
+                setupRecyclerView(
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                )
+            }
         }
 
         return super.onOptionsItemSelected(item)

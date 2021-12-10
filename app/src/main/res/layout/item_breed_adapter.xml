@@ -19,34 +19,35 @@
             android:id="@+id/cLayoutBreedAdapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
             >
 
             <ImageView
                 android:id="@+id/ivBreedAdapter"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/dog"
-                android:contentDescription="@string/app_name" />
+                tools:srcCompat="@drawable/dog" />
 
             <TextView
                 android:id="@+id/tvNameBreedAdapter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/lato"
-                tools:text="TextView"
                 android:padding="8dp"
-                android:textSize="20sp"
+                android:textAlignment="center"
                 android:textColor="@color/dark"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ivBreedAdapter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivBreedAdapter"
-                app:layout_constraintTop_toTopOf="@+id/ivBreedAdapter" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivBreedAdapter"
+                tools:text="TextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
