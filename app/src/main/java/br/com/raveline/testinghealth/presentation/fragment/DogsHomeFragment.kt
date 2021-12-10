@@ -1,23 +1,17 @@
 package br.com.raveline.testinghealth.presentation.fragment
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.OvershootInterpolator
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import br.com.raveline.testinghealth.R
 import br.com.raveline.testinghealth.data.model.BreedsItem
 import br.com.raveline.testinghealth.databinding.FragmentDogsHomeBinding
 import br.com.raveline.testinghealth.presentation.adapter.BreedsAdapter
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModel
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import javax.inject.Inject
 
@@ -46,7 +40,7 @@ class DogsHomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         dogsBinding = FragmentDogsHomeBinding.inflate(inflater, container, false)
-
+        setHasOptionsMenu(true)
         getDogsBreed()
 
 
@@ -56,7 +50,7 @@ class DogsHomeFragment : Fragment() {
     private fun getDogsBreed() {
         breedViewModel.getBreeds().observe(viewLifecycleOwner, { breeds ->
             if (breeds != null) {
-               setupRecyclerView(breeds)
+                setupRecyclerView(breeds)
             }
         })
     }
@@ -68,6 +62,23 @@ class DogsHomeFragment : Fragment() {
             breedsAdapter.setData(breedsList)
             adapter = breedsAdapter
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_order, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuOrderId -> breedViewModel.getOrderedBreed()
+                .observe(viewLifecycleOwner, { items ->
+                    breedsAdapter.setData(items)
+                    dogsBinding.recyclerViewFragmentsHome.scheduleLayoutAnimation()
+                })
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 

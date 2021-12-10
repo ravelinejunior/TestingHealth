@@ -15,6 +15,10 @@ class BreedLocalDataSourceImpl(
         return dao.getBreedsBySearch()
     }
 
+    override suspend fun getBreedsOrderedByName(): List<BreedsItem> {
+        return dao.getAllBreedsByName()
+    }
+
     override suspend fun insertBreeds(breeds: List<BreedsItem>) {
         return dao.insertBreeds(breeds)
     }

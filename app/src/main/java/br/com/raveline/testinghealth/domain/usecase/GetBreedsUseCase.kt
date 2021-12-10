@@ -10,6 +10,7 @@ class GetBreedsUseCase(
     private val breedsRepository: BreedsRepository
 ) {
     suspend fun executeBreeds():List<BreedsItem> = breedsRepository.getBreeds()
+    suspend fun executeOrderedBreeds():List<BreedsItem> = breedsRepository.getBreedsOrdered()
     suspend fun executeBreedsById(query:String): List<BreedBySearchItem> =
         breedsRepository.getBreedsBySearch(query)
 }

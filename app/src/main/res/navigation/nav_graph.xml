@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="br.com.raveline.testinghealth.presentation.fragment.DetailsFragment"
-        android:label="fragment_details"
+        android:label="Details"
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_detailsFragment_to_searchDogsFragment"

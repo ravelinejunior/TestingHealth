@@ -17,4 +17,9 @@ class BreedViewModel(
         val breedsBySearch = getBreedsUseCase.executeBreedsById(query)
         emit(breedsBySearch)
     }
+
+    fun getOrderedBreed() = liveData {
+        val orderedBreed = getBreedsUseCase.executeOrderedBreeds()
+        emit(orderedBreed)
+    }
 }

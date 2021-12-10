@@ -23,24 +23,12 @@ class BreedRepositoryImpl(
        return getBreedsBySearchFromApi(query)
     }
 
+    override suspend fun getBreedsOrdered(): List<BreedsItem> {
+        return getOrderedBreeds()
+    }
+
 
     private suspend fun getBreedsFromApi(): Breeds {
-        /*lateinit var breedsList: Breeds
-
-        try {
-            val response = breedRemoteDataSource.getBreeds()
-            val body = response.body()
-
-            if (body != null) {
-                breedsList = body
-            }
-
-            return breedsList
-        } catch (e: Exception) {
-            Log.e("ApiRepositoryImpl", e.message.toString())
-            return Breeds()
-        }*/
-
         return breedRemoteDataSource.getBreeds().body()!!
     }
 
@@ -69,6 +57,25 @@ class BreedRepositoryImpl(
 
         try {
             breedsList = breedLocalDataSource.getBreeds()
+        } catch (e: Exception) {
+            Log.e("ApiRepositoryImpl", e.message.toString())
+        }
+
+        if (breedsList.isNotEmpty()) {
+            return breedsList
+        } else {
+            breedsList = getBreedsFromApi()
+            breedLocalDataSource.insertBreeds(breedsList)
+        }
+
+        return breedsList
+    }
+
+     suspend fun getOrderedBreeds(): List<BreedsItem>{
+        lateinit var breedsList: List<BreedsItem>
+
+        try {
+            breedsList = breedLocalDataSource.getBreedsOrderedByName()
         } catch (e: Exception) {
             Log.e("ApiRepositoryImpl", e.message.toString())
         }

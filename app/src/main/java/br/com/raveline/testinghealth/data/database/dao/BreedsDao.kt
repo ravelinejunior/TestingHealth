@@ -14,7 +14,7 @@ interface BreedsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBreeds(breeds: List<BreedsItem>)
 
-    @Query("SELECT * FROM BREED_TABLE")
+    @Query("SELECT * FROM BREED_TABLE order by id DESC")
     suspend fun getAllBreeds(): List<BreedsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -23,5 +23,7 @@ interface BreedsDao {
     @Query("SELECT * FROM BREAD_BY_SEARCH_TABLE")
     suspend fun getBreedsBySearch(): List<BreedBySearchItem>
 
+    @Query("SELECT * FROM BREED_TABLE ORDER BY name")
+    suspend fun getAllBreedsByName(): List<BreedsItem>
 
 }
