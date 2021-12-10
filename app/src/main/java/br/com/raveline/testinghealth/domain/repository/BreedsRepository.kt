@@ -6,7 +6,7 @@ import br.com.raveline.testinghealth.data.model.BreedsBySearch
 import br.com.raveline.testinghealth.data.model.BreedsItem
 
 interface BreedsRepository {
-    suspend fun getBreeds():List<BreedsItem>
+    suspend fun getBreeds(page:Int):List<BreedsItem>
     suspend fun getBreedsBySearch(query:String):List<BreedBySearchItem>
     suspend fun getBreedsOrdered():List<BreedsItem>
 }

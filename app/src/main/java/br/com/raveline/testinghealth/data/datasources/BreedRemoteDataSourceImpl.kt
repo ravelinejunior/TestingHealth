@@ -8,8 +8,8 @@ import retrofit2.Response
 class BreedRemoteDataSourceImpl(
     private val breedsService: BreedsService,
     ):BreedRemoteDataSource {
-    override suspend fun getBreeds(): Response<Breeds> {
-        return breedsService.getDogsBreed()
+    override suspend fun getBreeds(page:Int): Response<Breeds> {
+        return breedsService.getDogsBreed(page)
     }
 
     override suspend fun getBreedsBySearch(query: String): Response<BreedsBySearch> {

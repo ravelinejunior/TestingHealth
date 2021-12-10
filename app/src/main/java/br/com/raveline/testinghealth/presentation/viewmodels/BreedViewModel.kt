@@ -1,5 +1,6 @@
 package br.com.raveline.testinghealth.presentation.viewmodels
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import br.com.raveline.testinghealth.data.model.Breeds
@@ -8,8 +9,11 @@ import br.com.raveline.testinghealth.domain.usecase.GetBreedsUseCase
 class BreedViewModel(
     private val getBreedsUseCase: GetBreedsUseCase
 ):ViewModel() {
-    fun getBreeds() = liveData {
-        val breeds = getBreedsUseCase.executeBreeds()
+
+    val isStaggered = mutableStateOf(false)
+
+    fun getBreeds(page:Int) = liveData {
+        val breeds = getBreedsUseCase.executeBreeds(page)
         emit(breeds)
     }
 

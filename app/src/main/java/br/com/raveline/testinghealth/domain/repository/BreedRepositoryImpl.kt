@@ -15,8 +15,8 @@ class BreedRepositoryImpl(
     private val breedLocalDataSource: BreedLocalDataSource
 ) : BreedsRepository {
 
-    override suspend fun getBreeds():List<BreedsItem>{
-        return getBreedsFromDatabase()
+    override suspend fun getBreeds(page: Int):List<BreedsItem>{
+        return getBreedsFromDatabase(page)
     }
 
     override suspend fun getBreedsBySearch(query: String): List<BreedBySearchItem>{
@@ -28,8 +28,8 @@ class BreedRepositoryImpl(
     }
 
 
-    private suspend fun getBreedsFromApi(): Breeds {
-        return breedRemoteDataSource.getBreeds().body()!!
+    private suspend fun getBreedsFromApi(page:Int): Breeds {
+        return breedRemoteDataSource.getBreeds(page).body()!!
     }
 
     private suspend fun getBreedsBySearchFromApi(
@@ -52,7 +52,7 @@ class BreedRepositoryImpl(
         }
     }
 
-    private suspend fun getBreedsFromDatabase(): List<BreedsItem> {
+    private suspend fun getBreedsFromDatabase(page:Int): List<BreedsItem> {
         lateinit var breedsList: List<BreedsItem>
 
         try {
@@ -64,14 +64,14 @@ class BreedRepositoryImpl(
         if (breedsList.isNotEmpty()) {
             return breedsList
         } else {
-            breedsList = getBreedsFromApi()
+            breedsList = getBreedsFromApi(page)
             breedLocalDataSource.insertBreeds(breedsList)
         }
 
         return breedsList
     }
 
-     suspend fun getOrderedBreeds(): List<BreedsItem>{
+     private suspend fun getOrderedBreeds(): List<BreedsItem>{
         lateinit var breedsList: List<BreedsItem>
 
         try {
@@ -83,7 +83,7 @@ class BreedRepositoryImpl(
         if (breedsList.isNotEmpty()) {
             return breedsList
         } else {
-            breedsList = getBreedsFromApi()
+            breedsList = getBreedsFromApi(0)
             breedLocalDataSource.insertBreeds(breedsList)
         }
 

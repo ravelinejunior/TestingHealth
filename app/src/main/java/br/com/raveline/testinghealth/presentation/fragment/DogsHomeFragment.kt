@@ -3,9 +3,11 @@ package br.com.raveline.testinghealth.presentation.fragment
 import android.os.Bundle
 import android.view.*
 import android.view.animation.OvershootInterpolator
+import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.raveline.testinghealth.R
 import br.com.raveline.testinghealth.data.model.BreedsItem
@@ -30,6 +32,12 @@ class DogsHomeFragment : Fragment() {
 
     lateinit var breedViewModel: BreedViewModel
 
+    private var isScrolling = false
+    private var isLoading = false
+    private var isLastPage = false
+    private var page = 1
+    private var pages = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,17 +56,19 @@ class DogsHomeFragment : Fragment() {
     }
 
     private fun getDogsBreed() {
-        breedViewModel.getBreeds().observe(viewLifecycleOwner, { breeds ->
+        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
             if (breeds != null) {
                 breedsAdapter.setData(breeds)
             }
+
+            isLastPage = page == pages
         })
 
         setupRecyclerView()
     }
 
     private fun setupRecyclerView(
-        layoutManager: StaggeredGridLayoutManager? = null,
+        layoutManager: StaggeredGridLayoutManager? = null
     ) {
         if(layoutManager != null){
             dogsBinding.recyclerViewFragmentsHome.apply {
@@ -72,6 +82,7 @@ class DogsHomeFragment : Fragment() {
                 setHasFixedSize(true)
                 itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
                 adapter = breedsAdapter
+                addOnScrollListener(this@DogsHomeFragment.onScrollListener)
             }
         }
     }
@@ -93,10 +104,78 @@ class DogsHomeFragment : Fragment() {
                 setupRecyclerView(
                     StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 )
+
+                breedViewModel.isStaggered.value = true
             }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private val onScrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+
+            //verificar se scroll do recyclerView foi tocado
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
+            }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+           try{
+               if(!breedViewModel.isStaggered.value){
+                   val layoutManager =
+                       dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
+                   val sizeOfCurrentList = layoutManager.itemCount
+                   val visibleItems = layoutManager.childCount
+                   //recuperar a position do primeiro item que aparece apos ser scrollado
+                   val topPosition = layoutManager.findFirstVisibleItemPosition()
+                   val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+                   val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+
+                   if (shouldPaginate) {
+                       page++
+                       breedViewModel.getBreeds(page)
+                       isScrolling = false
+                   }
+               }else{
+                   val layoutManager =
+                       dogsBinding.recyclerViewFragmentsHome.layoutManager as StaggeredGridLayoutManager
+                   val sizeOfCurrentList = layoutManager.itemCount
+                   val visibleItems = layoutManager.childCount
+                   //recuperar a position do primeiro item que aparece apos ser scrollado
+                   val topPosition = layoutManager.itemCount
+                   val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+                   val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+
+                   if (shouldPaginate) {
+                       page++
+                       breedViewModel.getBreeds(page)
+                       isScrolling = false
+                   }
+               }
+           }catch (e:Exception){
+               val layoutManager =
+                   dogsBinding.recyclerViewFragmentsHome.layoutManager as LinearLayoutManager
+               val sizeOfCurrentList = layoutManager.itemCount
+               val visibleItems = layoutManager.childCount
+               //recuperar a position do primeiro item que aparece apos ser scrollado
+               val topPosition = layoutManager.findFirstVisibleItemPosition()
+               val hasReachedToEnd = topPosition + visibleItems >= sizeOfCurrentList
+               val shouldPaginate = !isLoading && !isLastPage && hasReachedToEnd && isScrolling
+
+               if (shouldPaginate) {
+                   page++
+                   breedViewModel.getBreeds(page)
+                   isScrolling = false
+               }
+
+               e.printStackTrace()
+           }
+
+        }
     }
 
 

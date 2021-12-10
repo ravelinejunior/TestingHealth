@@ -10,7 +10,10 @@ import retrofit2.http.Query
 interface BreedsService {
 
     @GET("breeds")
-    suspend fun getDogsBreed(@Query("api_key") apiKey: String = API_KEY): Response<Breeds>
+    suspend fun getDogsBreed(
+        @Query("page") page:Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ): Response<Breeds>
 
     @GET("breeds/search")
     suspend fun getDogsBreedBySearch(
