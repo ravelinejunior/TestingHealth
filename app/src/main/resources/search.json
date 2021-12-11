@@ -1,0 +1,466 @@
+[
+  {
+    "bred_for": "A wild pack animal",
+    "height": {
+      "imperial": "30",
+      "metric": "76"
+    },
+    "id": 3,
+    "life_span": "11 years",
+    "name": "African Hunting Dog",
+    "origin": "",
+    "reference_image_id": "rkiByec47",
+    "temperament": "Wild, Hardworking, Dutiful",
+    "weight": {
+      "imperial": "44 - 66",
+      "metric": "20 - 30"
+    }
+  },
+  {
+    "bred_for": "Sheep guarding",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "28 - 34",
+      "metric": "71 - 86"
+    },
+    "id": 5,
+    "life_span": "10 - 12 years",
+    "name": "Akbash Dog",
+    "origin": "",
+    "reference_image_id": "26pHT3Qk7",
+    "temperament": "Loyal, Independent, Intelligent, Brave",
+    "weight": {
+      "imperial": "90 - 120",
+      "metric": "41 - 54"
+    }
+  },
+  {
+    "bred_for": "Guarding",
+    "breed_group": "Mixed",
+    "description": "The Alapaha Blue Blood Bulldog is a well-developed, exaggerated bulldog with a broad head and natural drop ears. The prominent muzzle is covered by loose upper lips. The prominent eyes are set well apart. The Alapaha's coat is relatively short and fairly stiff. Preferred colors are blue merle, brown merle, or red merle all trimmed in white or chocolate and white. Also preferred are the glass eyes (blue) or marble eyes (brown and blue mixed in a single eye). The ears and tail are never trimmed or docked. The body is sturdy and very muscular. The well-muscled hips are narrower than the chest. The straight back is as long as the dog is high at the shoulders. The dewclaws are never removed and the feet are cat-like.",
+    "height": {
+      "imperial": "18 - 24",
+      "metric": "46 - 61"
+    },
+    "history": "",
+    "id": 7,
+    "life_span": "12 - 13 years",
+    "name": "Alapaha Blue Blood Bulldog",
+    "reference_image_id": "33mJ-V3RX",
+    "temperament": "Loving, Protective, Trainable, Dutiful, Responsible",
+    "weight": {
+      "imperial": "55 - 90",
+      "metric": "25 - 41"
+    }
+  },
+  {
+    "breed_group": "Working",
+    "height": {
+      "imperial": "22 - 27",
+      "metric": "56 - 69"
+    },
+    "id": 10,
+    "life_span": "10 - 12 years",
+    "name": "American Bulldog",
+    "reference_image_id": "pk1AAdloG",
+    "temperament": "Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant",
+    "weight": {
+      "imperial": "60 - 120",
+      "metric": "27 - 54"
+    }
+  },
+  {
+    "bred_for": "Circus performer",
+    "breed_group": "Non-Sporting",
+    "country_code": "US",
+    "height": {
+      "imperial": "15 - 19",
+      "metric": "38 - 48"
+    },
+    "id": 12,
+    "life_span": "12 - 15 years",
+    "name": "American Eskimo Dog",
+    "reference_image_id": "Bymjyec4m",
+    "temperament": "Friendly, Alert, Reserved, Intelligent, Protective",
+    "weight": {
+      "imperial": "20 - 40",
+      "metric": "9 - 18"
+    }
+  },
+  {
+    "bred_for": "Companionship",
+    "country_code": "US",
+    "height": {
+      "imperial": "9 - 12",
+      "metric": "23 - 30"
+    },
+    "id": 13,
+    "life_span": "13 – 15 years",
+    "name": "American Eskimo Dog (Miniature)",
+    "reference_image_id": "_gn8GLrE6",
+    "temperament": "Friendly, Alert, Reserved, Intelligent, Protective",
+    "weight": {
+      "imperial": "7 - 10",
+      "metric": "3 - 5"
+    }
+  },
+  {
+    "bred_for": "Livestock herding",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "27 - 29",
+      "metric": "69 - 74"
+    },
+    "id": 18,
+    "life_span": "11 - 13 years",
+    "name": "Anatolian Shepherd Dog",
+    "reference_image_id": "BJT0Jx5Nm",
+    "temperament": "Steady, Bold, Independent, Confident, Intelligent, Proud",
+    "weight": {
+      "imperial": "80 - 150",
+      "metric": "36 - 68"
+    }
+  },
+  {
+    "bred_for": "Cattle herding, herding trials",
+    "breed_group": "Herding",
+    "country_code": "AU",
+    "height": {
+      "imperial": "17 - 20",
+      "metric": "43 - 51"
+    },
+    "id": 21,
+    "life_span": "12 - 14 years",
+    "name": "Australian Cattle Dog",
+    "reference_image_id": "IBkYVm4v1",
+    "temperament": "Cautious, Energetic, Loyal, Obedient, Protective, Brave",
+    "weight": {
+      "imperial": "44 - 62",
+      "metric": "20 - 28"
+    }
+  },
+  {
+    "bred_for": "Stock herding",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "22 - 26",
+      "metric": "56 - 66"
+    },
+    "id": 37,
+    "life_span": "12 - 14 years",
+    "name": "Belgian Sheepdog",
+    "temperament": "Affectionate, Loyal, Intelligent, Dominant, Active, Powerful",
+    "weight": {
+      "imperial": "40 - 75",
+      "metric": "18 - 34"
+    }
+  },
+  {
+    "bred_for": "Draft work",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "23 - 27.5",
+      "metric": "58 - 70"
+    },
+    "id": 41,
+    "life_span": "7 - 10 years",
+    "name": "Bernese Mountain Dog",
+    "reference_image_id": "S1fFlx5Em",
+    "temperament": "Affectionate, Loyal, Intelligent, Faithful",
+    "weight": {
+      "imperial": "65 - 120",
+      "metric": "29 - 54"
+    }
+  },
+  {
+    "bred_for": "Bull baiting",
+    "breed_group": "Non-Sporting",
+    "height": {
+      "imperial": "12 - 16",
+      "metric": "30 - 41"
+    },
+    "id": 63,
+    "life_span": "8 - 10 years",
+    "name": "Bulldog",
+    "temperament": "Gregarious, Docile, Willful, Friendly",
+    "weight": {
+      "imperial": "40 - 50",
+      "metric": "18 - 23"
+    }
+  },
+  {
+    "bred_for": "Guarding flocks and encampments",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "19 - 24",
+      "metric": "48 - 61"
+    },
+    "id": 66,
+    "life_span": "12 - 14 years",
+    "name": "Canaan Dog",
+    "reference_image_id": "",
+    "temperament": "Cautious, Devoted, Alert, Quick, Intelligent, Vigilant",
+    "weight": {
+      "imperial": "35 - 55",
+      "metric": "16 - 25"
+    }
+  },
+  {
+    "bred_for": "Driving livestock",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "20 - 26",
+      "metric": "51 - 66"
+    },
+    "id": 69,
+    "life_span": "10 - 12 years",
+    "name": "Catahoula Leopard Dog",
+    "reference_image_id": "BJcNbec4X",
+    "temperament": "Energetic, Inquisitive, Independent, Gentle, Intelligent, Loving",
+    "weight": {
+      "imperial": "50 - 95",
+      "metric": "23 - 43"
+    }
+  },
+  {
+    "bred_for": "Big-game hunting",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "23.5 - 27",
+      "metric": "60 - 69"
+    },
+    "id": 95,
+    "life_span": "10 - 12 years",
+    "name": "Dogo Argentino",
+    "reference_image_id": "S1nhWx94Q",
+    "temperament": "Friendly, Affectionate, Cheerful, Loyal, Tolerant, Protective",
+    "weight": {
+      "imperial": "80 - 100",
+      "metric": "36 - 45"
+    }
+  },
+  {
+    "bred_for": "Hunting, Guarding, Fighting against bears, wolves and other dogs",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "23 - 27",
+      "metric": "58 - 69"
+    },
+    "id": 96,
+    "life_span": "5 - 10 years",
+    "name": "Dogue de Bordeaux",
+    "temperament": "Devoted, Loyal, Companionable, Vigilant, Even Tempered, Courageous",
+    "weight": {
+      "imperial": "90 - 160",
+      "metric": "41 - 73"
+    }
+  },
+  {
+    "bred_for": "Herding cattle and working alongside larger breeds that guarded the livestock.",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "16 - 20",
+      "metric": "41 - 51"
+    },
+    "id": 106,
+    "life_span": "10 - 13 years",
+    "name": "Entlebucher Mountain Dog",
+    "temperament": "Self-confidence, Devoted, Agile, Loyal, Independent, Intelligent",
+    "weight": {
+      "imperial": "45 - 65",
+      "metric": "20 - 29"
+    }
+  },
+  {
+    "bred_for": "Lapdog",
+    "breed_group": "Non-Sporting",
+    "height": {
+      "imperial": "11 - 12",
+      "metric": "28 - 30"
+    },
+    "id": 113,
+    "life_span": "9 - 11 years",
+    "name": "French Bulldog",
+    "reference_image_id": "HyWNfxc47",
+    "temperament": "Playful, Affectionate, Keen, Sociable, Lively, Alert, Easygoing, Patient, Athletic, Bright",
+    "weight": {
+      "imperial": "28",
+      "metric": "13"
+    }
+  },
+  {
+    "bred_for": "Herding, Guard dog",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "22 - 26",
+      "metric": "56 - 66"
+    },
+    "id": 115,
+    "life_span": "10 - 13 years",
+    "name": "German Shepherd Dog",
+    "reference_image_id": "SJyBfg5NX",
+    "temperament": "Alert, Loyal, Obedient, Curious, Confident, Intelligent, Watchful, Courageous",
+    "weight": {
+      "imperial": "50 - 90",
+      "metric": "23 - 41"
+    }
+  },
+  {
+    "bred_for": "Guarding and herding livestock, pulling carts loaded with milk and cheese",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "23.5 - 28.5",
+      "metric": "60 - 72"
+    },
+    "id": 126,
+    "life_span": "7 - 9 years",
+    "name": "Greater Swiss Mountain Dog",
+    "temperament": "Self-confidence, Good-natured, Fearless, Devoted, Alert, Protective",
+    "weight": {
+      "imperial": "85 - 140",
+      "metric": "39 - 64"
+    }
+  },
+  {
+    "bred_for": "Herding. Protecting flocks, especially lambs, from birds of prey.",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "16.5 - 18",
+      "metric": "42 - 46"
+    },
+    "id": 132,
+    "life_span": "12 - 15 years",
+    "name": "Icelandic Sheepdog",
+    "temperament": "Hardy, Cheerful, Energetic, Agile, Inquisitive, Alert",
+    "weight": {
+      "imperial": "20 - 45",
+      "metric": "9 - 20"
+    }
+  },
+  {
+    "breed_group": "Working",
+    "height": {
+      "imperial": "17 - 22",
+      "metric": "43 - 56"
+    },
+    "id": 150,
+    "life_span": "12 - 16 years",
+    "name": "Lacy Dog",
+    "temperament": "Bold, Devoted, Alert, Intelligent, Active, Intense",
+    "weight": {
+      "imperial": "30 - 50",
+      "metric": "14 - 23"
+    }
+  },
+  {
+    "breed_group": "Mixed",
+    "height": {
+      "imperial": "24 - 30",
+      "metric": "61 - 76"
+    },
+    "id": 158,
+    "life_span": "10 - 13 years",
+    "name": "Longdog",
+    "weight": {
+      "imperial": "35 - 100",
+      "metric": "16 - 45"
+    }
+  },
+  {
+    "bred_for": "Driving sheep, cattle",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "21",
+      "metric": "53"
+    },
+    "id": 178,
+    "life_span": "10 - 12 years",
+    "name": "Old English Sheepdog",
+    "reference_image_id": "HkZ57lq4m",
+    "temperament": "Sociable, Bubbly, Playful, Adaptable, Intelligent, Loving",
+    "weight": {
+      "imperial": "60 - 100",
+      "metric": "27 - 45"
+    }
+  },
+  {
+    "height": {
+      "imperial": "15 - 19",
+      "metric": "38 - 48"
+    },
+    "id": 179,
+    "life_span": "9 – 14 years",
+    "name": "Olde English Bulldogge",
+    "reference_image_id": "B1d5me547",
+    "temperament": "Friendly, Alert, Confident, Loving, Courageous, Strong",
+    "weight": {
+      "imperial": "65 – 85",
+      "metric": "NaN"
+    }
+  },
+  {
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "17 - 20",
+      "metric": "43 - 51"
+    },
+    "id": 191,
+    "life_span": "10 - 12 years",
+    "name": "Polish Lowland Sheepdog",
+    "temperament": "Self-confidence, Lively, Agile, Intelligent, Even Tempered, Perceptive",
+    "weight": {
+      "imperial": "35 - 55",
+      "metric": "16 - 25"
+    }
+  },
+  {
+    "bred_for": "Fishing aid",
+    "breed_group": "Working",
+    "height": {
+      "imperial": "17 - 23",
+      "metric": "43 - 58"
+    },
+    "id": 199,
+    "life_span": "10 - 14 years",
+    "name": "Portuguese Water Dog",
+    "temperament": "Quarrelsome, Docile, Impetuous, Obedient, Intelligent, Brave",
+    "weight": {
+      "imperial": "35 - 60",
+      "metric": "16 - 27"
+    }
+  },
+  {
+    "bred_for": "Sheep herding",
+    "breed_group": "Herding",
+    "height": {
+      "imperial": "13 - 16",
+      "metric": "33 - 41"
+    },
+    "id": 221,
+    "life_span": "12 - 14 years",
+    "name": "Shetland Sheepdog",
+    "reference_image_id": "rJa29l9E7",
+    "temperament": "Affectionate, Lively, Responsive, Alert, Loyal, Reserved, Playful, Gentle, Intelligent, Active, Trainable, Strong",
+    "weight": {
+      "imperial": "30",
+      "metric": "14"
+    }
+  },
+  {
+    "bred_for": "Herding flocks of sheep and goats from one pasture to another",
+    "breed_group": "Sporting",
+    "height": {
+      "imperial": "16 - 20",
+      "metric": "41 - 51"
+    },
+    "id": 235,
+    "life_span": "12 - 15 years",
+    "name": "Spanish Water Dog",
+    "reference_image_id": "HJf4jl9VX",
+    "temperament": "Trainable, Diligent, Affectionate, Loyal, Athletic, Intelligent",
+    "weight": {
+      "imperial": "30 - 50",
+      "metric": "14 - 23"
+    }
+  }
+]
