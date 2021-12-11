@@ -14,6 +14,9 @@ interface BreedsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBreeds(breeds: List<BreedsItem>)
 
+    @Query("DELETE FROM breed_table")
+    suspend fun deleteFromBreeds()
+
     @Query("SELECT * FROM BREED_TABLE order by id DESC")
     suspend fun getAllBreeds(): List<BreedsItem>
 

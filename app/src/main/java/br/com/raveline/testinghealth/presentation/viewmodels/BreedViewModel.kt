@@ -11,11 +11,9 @@ class BreedViewModel(
 ) : ViewModel() {
 
     val isStaggered = mutableStateOf(false)
-    var listBreeds = emptyList<BreedsItem>()
 
     fun getBreeds(page: Int) = liveData {
         val breeds = getBreedsUseCase.executeBreeds(page)
-        listBreeds = breeds
         emit(breeds)
     }
 

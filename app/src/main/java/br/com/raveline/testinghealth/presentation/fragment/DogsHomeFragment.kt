@@ -18,6 +18,7 @@ import br.com.raveline.testinghealth.presentation.adapter.BreedsAdapter
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModel
 import br.com.raveline.testinghealth.presentation.viewmodels.BreedViewModelFactory
 import br.com.raveline.testinghealth.utils.NetworkListeners
+import br.com.raveline.testinghealth.utils.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.coroutines.flow.collect
@@ -68,8 +69,8 @@ class DogsHomeFragment : Fragment() {
         lifecycleScope.launch {
             networkListeners.checkNetworkAvailability(dogsBinding.root.context)
                 .observe(viewLifecycleOwner,{status ->
-                    if (status || breedViewModel.listBreeds.isNotEmpty()) {
-                        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
+                    if (status) {
+                        breedViewModel.getBreeds(0).observeOnce(viewLifecycleOwner, { breeds ->
                             if (breeds != null) {
                                 breedsAdapter.setData(breeds)
                             }
@@ -99,16 +100,16 @@ class DogsHomeFragment : Fragment() {
                 setHasFixedSize(true)
                 itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
                 setLayoutManager(layoutManager)
-                adapter = breedsAdapter
             }
         } else {
             dogsBinding.recyclerViewFragmentsHome.apply {
                 setHasFixedSize(true)
                 itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
-                adapter = breedsAdapter
                 addOnScrollListener(this@DogsHomeFragment.onScrollListener)
             }
         }
+
+        dogsBinding.recyclerViewFragmentsHome.adapter = breedsAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

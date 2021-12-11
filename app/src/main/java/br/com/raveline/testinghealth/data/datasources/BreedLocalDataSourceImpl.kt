@@ -15,6 +15,10 @@ class BreedLocalDataSourceImpl(
         return dao.getBreedsBySearch()
     }
 
+    override suspend fun deleteBreeds() {
+        dao.deleteFromBreeds()
+    }
+
     override suspend fun getBreedsOrderedByName(): List<BreedsItem> {
         return dao.getAllBreedsByName()
     }

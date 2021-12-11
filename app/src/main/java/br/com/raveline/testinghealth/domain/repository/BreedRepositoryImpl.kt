@@ -64,6 +64,7 @@ class BreedRepositoryImpl(
         if (breedsList.isNotEmpty()) {
             return breedsList
         } else {
+            breedLocalDataSource.deleteBreeds()
             breedsList = getBreedsFromApi(page)
             breedLocalDataSource.insertBreeds(breedsList)
         }
@@ -75,6 +76,7 @@ class BreedRepositoryImpl(
         lateinit var breedsList: List<BreedsItem>
 
         try {
+            breedLocalDataSource.deleteBreeds()
             breedsList = breedLocalDataSource.getBreedsOrderedByName()
         } catch (e: Exception) {
             Log.e("ApiRepositoryImpl", e.message.toString())
