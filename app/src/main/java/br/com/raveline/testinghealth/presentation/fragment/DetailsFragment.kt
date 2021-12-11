@@ -49,13 +49,13 @@ class DetailsFragment : Fragment() {
                 val breed = argsBreed.breedsSearch
                 detailsBinding.tvNameDetailFragment.text = breed?.name
 
-                if (breed?.origin == null) {
+                if (breed?.origin == null || breed.origin.isEmpty()) {
                     detailsBinding.tvOriginDetailFragment.text = "Origin Unknown"
                 } else {
                     detailsBinding.tvOriginDetailFragment.text = breed.origin
                 }
 
-                if (breed?.temperament == null) {
+                if (breed?.temperament == null || breed.temperament.isEmpty()) {
                     detailsBinding.tvTemperamentDetailsFragment.text = "Temperament Unknown"
                 } else {
                     detailsBinding.tvTemperamentDetailsFragment.text = breed.temperament

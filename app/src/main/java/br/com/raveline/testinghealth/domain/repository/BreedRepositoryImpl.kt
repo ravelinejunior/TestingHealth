@@ -19,6 +19,10 @@ class BreedRepositoryImpl(
         return getBreedsFromDatabase(page)
     }
 
+    override suspend fun getBreedsFromDb(): List<BreedsItem> {
+        return breedLocalDataSource.getBreeds()
+    }
+
     override suspend fun getBreedsBySearch(query: String): List<BreedBySearchItem>{
        return getBreedsBySearchFromApi(query)
     }
@@ -76,7 +80,7 @@ class BreedRepositoryImpl(
         lateinit var breedsList: List<BreedsItem>
 
         try {
-            breedLocalDataSource.deleteBreeds()
+          //  breedLocalDataSource.deleteBreeds()
             breedsList = breedLocalDataSource.getBreedsOrderedByName()
         } catch (e: Exception) {
             Log.e("ApiRepositoryImpl", e.message.toString())
@@ -85,8 +89,14 @@ class BreedRepositoryImpl(
         if (breedsList.isNotEmpty()) {
             return breedsList
         } else {
-            breedsList = getBreedsFromApi(0)
-            breedLocalDataSource.insertBreeds(breedsList)
+            try{
+                breedsList = getBreedsFromApi(0)
+                breedLocalDataSource.deleteBreeds()
+                breedLocalDataSource.insertBreeds(breedsList)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
         }
 
         return breedsList

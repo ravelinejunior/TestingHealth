@@ -21,7 +21,6 @@ import br.com.raveline.testinghealth.utils.NetworkListeners
 import br.com.raveline.testinghealth.utils.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -68,9 +67,9 @@ class DogsHomeFragment : Fragment() {
 
         lifecycleScope.launch {
             networkListeners.checkNetworkAvailability(dogsBinding.root.context)
-                .observe(viewLifecycleOwner,{status ->
+                .observe(viewLifecycleOwner, { status ->
                     if (status) {
-                        breedViewModel.getBreeds(0).observeOnce(viewLifecycleOwner, { breeds ->
+                        breedViewModel.getBreeds(0).observe(viewLifecycleOwner, { breeds ->
                             if (breeds != null) {
                                 breedsAdapter.setData(breeds)
                             }
@@ -78,11 +77,20 @@ class DogsHomeFragment : Fragment() {
                         })
 
                         setupRecyclerView()
-                    }
+                    } else {
 
-                    else {
-                        dogsBinding.recyclerViewFragmentsHome.visibility = GONE
-                        dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
+                        breedViewModel.getBreedsFromDb().observe(viewLifecycleOwner, { breeds ->
+                            if (breeds.isNotEmpty()) {
+                                breedsAdapter.setData(breeds)
+                                setupRecyclerView()
+                            } else {
+                                dogsBinding.recyclerViewFragmentsHome.visibility = GONE
+                                dogsBinding.ivNoConnectionFragmentDogs.visibility = VISIBLE
+                            }
+
+                        })
+
+
                     }
                 })
 
@@ -97,19 +105,16 @@ class DogsHomeFragment : Fragment() {
         dogsBinding.ivNoConnectionFragmentDogs.visibility = GONE
         if (layoutManager != null) {
             dogsBinding.recyclerViewFragmentsHome.apply {
-                setHasFixedSize(true)
-                itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
                 setLayoutManager(layoutManager)
-            }
-        } else {
-            dogsBinding.recyclerViewFragmentsHome.apply {
-                setHasFixedSize(true)
-                itemAnimator = SlideInLeftAnimator(OvershootInterpolator(10f))
-                addOnScrollListener(this@DogsHomeFragment.onScrollListener)
             }
         }
 
-        dogsBinding.recyclerViewFragmentsHome.adapter = breedsAdapter
+        dogsBinding.recyclerViewFragmentsHome.apply {
+            itemAnimator = SlideInLeftAnimator(OvershootInterpolator(12f))
+            setHasFixedSize(true)
+            adapter = breedsAdapter
+            addOnScrollListener(this@DogsHomeFragment.onScrollListener)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -119,11 +124,17 @@ class DogsHomeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menuOrderId -> breedViewModel.getOrderedBreed()
-                .observe(viewLifecycleOwner, { items ->
-                    breedsAdapter.setData(items)
-                    dogsBinding.recyclerViewFragmentsHome.scheduleLayoutAnimation()
-                })
+            R.id.menuOrderId -> {
+                try {
+                    breedViewModel.getOrderedBreed()
+                        .observe(viewLifecycleOwner, { items ->
+                            breedsAdapter.setData(items)
+                            dogsBinding.recyclerViewFragmentsHome.scheduleLayoutAnimation()
+                        })
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
 
             R.id.menuLayoutId -> {
                 setupRecyclerView(
